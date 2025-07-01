@@ -1,0 +1,6 @@
+@eContentApp.Host_HostAddress = http://localhost:5026
+
+GET {{eContentApp.Host_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
