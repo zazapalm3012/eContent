@@ -12,7 +12,7 @@ namespace eContentApp.Infrastructure.Configurations
                 .IsRequired()
                 .HasMaxLength(255);
 
-            builder.Property(p => p.Thumnail_url)
+            builder.Property(p => p.ThumbnailUrl)
                 .HasMaxLength(500);
 
             builder.Property(p => p.PublishedAt)

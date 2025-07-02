@@ -1,8 +1,8 @@
-﻿using eContentApp.Application.DTOs.Category;
+using System;
 
-namespace eContentApp.Application.DTOs.Post
+namespace eContentApp.Web.Models
 {
-    public class PostDetailDto
+    public class PostDetailViewModel
     {
         public Guid Id { get; set; }
         public string Title { get; set; } = string.Empty;
@@ -10,6 +10,6 @@ namespace eContentApp.Application.DTOs.Post
         public string? ThumbnailUrl { get; set; }
         public DateTime PublishedAt { get; set; }
         public string Status { get; set; } = string.Empty;
-        //public List<CategoryDto> Categories { get; set; } = [];
+        public ICollection<CategoryViewModel> Categories { get; set; } = new List<CategoryViewModel>();
     }
 }

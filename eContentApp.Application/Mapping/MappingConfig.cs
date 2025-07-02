@@ -10,7 +10,8 @@ namespace eContentApp.Application.Mapping
         public MappingConfig()
         {
             CreateMap<Category, CategoryDto>().ReverseMap();
-            CreateMap<Post, PostListDto>();
+            CreateMap<Post, PostListDto>()
+                .ForMember(dest => dest.ThumbnailUrl, opt => opt.MapFrom(src => src.ThumbnailUrl));
             CreateMap<Post, PostDetailDto>();
             CreateMap<CreatePostDto, Post>()
                 .ForMember(dest => dest.Status, opt => opt.Ignore()) // Status is handled manually in service

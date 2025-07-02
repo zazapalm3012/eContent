@@ -10,7 +10,7 @@ namespace eContentApp.Application.DTOs.Post
         public string? Content { get; set; }
         [MaxLength(500)]
         public string? ThumbnailUrl { get; set; }
-        public List<Guid> CategoryIds { get; set; } = [];
+        public List<Guid>? CategoryIds { get; set; } = [];
         public string? Status { get; set; }
     }
 }

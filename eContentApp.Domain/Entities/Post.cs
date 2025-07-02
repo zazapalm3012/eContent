@@ -14,7 +14,7 @@ namespace eContentApp.Domain.Entities
         public string? Content { get; set; }
 
         [MaxLength(500)]
-        public string? Thumnail_url { get; set; }
+        public string? ThumbnailUrl { get; set; }
 
         public DateTime PublishedAt { get; set; } = DateTime.UtcNow;
 

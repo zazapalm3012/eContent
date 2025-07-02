@@ -24,5 +24,9 @@ namespace eContentApp.Infrastructure.Repositories
                          .Include(p => p.Categories)
                          .ToListAsync();
         }
+        public async Task<IEnumerable<Post>> GetAllPostsSimpleAsync() 
+        {
+            return await _dbSet.ToListAsync();
+        }
     }
 }

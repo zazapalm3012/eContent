@@ -1,8 +1,27 @@
-﻿@{
+﻿@model IEnumerable<eContentApp.Web.Models.PostViewModel>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-right mb-3">
+    <a asp-action="Create" class="btn btn-primary">Create New Post</a>
+</div>
+<div class="container">
+    <div class="row">
+        @foreach (var post in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="post-card">
+                    <a href="@Url.Action("Details", "Home", new { id = post.Id })">
+                        <img src="@post.ThumbnailUrl" class="img-fluid mb-3" alt="@post.Title">
+                    </a>
+                    <h2><a href="@Url.Action("Details", "Home", new { id = post.Id })">@post.Title</a></h2>
+                    <div class="post-meta">
+                        Published: @post.PublishedAt.ToShortDateString()
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eContentApp.Infrastructure"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eContentApp.Host", "eContentApp.Host\eContentApp.Host.csproj", "{7955DC23-8176-4C91-9142-B37E54144808}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eContentApp.Web", "eContentApp.Web\eContentApp.Web.csproj", "{AFE03193-DF69-48CC-B8F5-601A38AD2212}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{7955DC23-8176-4C91-9142-B37E54144808}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7955DC23-8176-4C91-9142-B37E54144808}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7955DC23-8176-4C91-9142-B37E54144808}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFE03193-DF69-48CC-B8F5-601A38AD2212}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFE03193-DF69-48CC-B8F5-601A38AD2212}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFE03193-DF69-48CC-B8F5-601A38AD2212}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFE03193-DF69-48CC-B8F5-601A38AD2212}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

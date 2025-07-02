@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "eContentApp.Host\\eContentApp.Host.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "eContentApp.Web\\eContentApp.Web.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

@@ -11,5 +11,7 @@ namespace eContentApp.Application.Interfaces
     {
         Task<Post?> GetPostByIdWithCategoriesAsync(Guid id);
         Task<IEnumerable<Post>> GetAllPostsWithCategoriesAsync();
+        Task<IEnumerable<Post>> GetAllPostsSimpleAsync();
+
     }
 }
