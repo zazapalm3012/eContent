@@ -59,7 +59,7 @@ namespace eContentApp.Application.Services
                 var categories = new List<Category>();
                 foreach (var categoryId in postDto.CategoryIds)
                 {
-                    // ใช้ _categoryRepository ในการดึง Category
+                    
                     var category = await _categoryRepository.GetByIdAsync(categoryId);
                     if (category != null)
                     {
@@ -85,6 +85,16 @@ namespace eContentApp.Application.Services
                 throw new ApplicationException($"Post with ID {postDto.Id} not found.");
             }
             _mapper.Map(postDto, existingPost);
+
+            if (string.IsNullOrEmpty(postDto.ThumbnailUrl))
+            {
+
+                existingPost.ThumbnailUrl = existingPost.ThumbnailUrl;
+            }
+            else
+            {
+                existingPost.ThumbnailUrl = postDto.ThumbnailUrl;
+            }
 
             if (!string.IsNullOrEmpty(postDto.Status) && Enum.TryParse(postDto.Status, true, out Domain.Entities.PostStatus parsedStatus))
             {

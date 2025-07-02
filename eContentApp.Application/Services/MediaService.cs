@@ -40,6 +40,7 @@ namespace eContentApp.Application.Services
             var media = new Media
             {
                 FileName = uniqueFileName,
+                //Store image in local
                 FilePath = "http://localhost:5026/images/" + uniqueFileName, // Absolute path for web access
                 FileType = fileDto.ContentType ?? string.Empty,
                 FileSize = fileDto.Content!.Length,

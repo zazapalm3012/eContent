@@ -19,4 +19,8 @@
     <ProjectReference Include="..\eContentApp.Infrastructure\eContentApp.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>

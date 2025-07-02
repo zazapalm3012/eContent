@@ -184,21 +184,26 @@ html {
     font-size: 2.5rem;
     color: #333;
     margin-bottom: 10px;
-
 }
 
 #post-display p {
     color: #666;
     font-size: 1rem;
-    margin-bottom: 1em;
-
+    margin-bottom: 1em; /* Add spacing between paragraphs */
 }
+
+#post-content-display img,
+.ql-editor img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Remove extra space below images */
+    margin: 10px auto; /* Center images and add vertical spacing */
+}
+
 #post-content-display {
     line-height: 1.8;
     color: #333;
     margin-top: 20px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
 }
 
 #post-content-display h1, #post-content-display h2, #post-content-display h3, #post-content-display h4, #post-content-display h5, #post-content-display h6 {
@@ -252,9 +257,15 @@ html {
     margin-bottom: 20px;
 }
 
+#editor {
+    width: 100%;
+    min-height: 700px;
+    max-height: 1000px;
+    overflow: hidden;
+}
 /* Quill Editor adjustments */
 .ql-editor {
-    min-height: 200px;
+    overflow-y: auto; 
     font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     font-size: 1rem;
     line-height: 1.8;
@@ -262,15 +273,19 @@ html {
 }
 
 .ql-toolbar.ql-snow {
+    border: 1px solid #ccc; /* More prominent border */
+    border-bottom: none; /* Remove bottom border to merge with container */
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    border-color: #e0e0e0;
+    width: 100%; /* Ensure toolbar takes full width */
 }
 
 .ql-container.ql-snow {
+    border: 1px solid #ccc; /* More prominent border */
+    border-top: none; /* Remove top border to merge with toolbar */
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
-    border-color: #e0e0e0;
+    width: 100%; /* Ensure container takes full width */
 }
 
 /* Form elements */
@@ -298,4 +313,32 @@ html {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
+}
+
+/* Edit Post UI Improvements */
+#post-edit {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+   
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#post-edit h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+    
+}
+
+#post-edit .form-group {
+    margin-bottom: 20px;
+
+}
+
+#post-edit .btn {
+    margin-right: 10px;
 }

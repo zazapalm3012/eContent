@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Microsoft.Extensions.Configuration; 
 
 namespace eContentApp.Web.Controllers
 {
@@ -12,17 +13,20 @@ namespace eContentApp.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly HttpClient _httpClient;
+        private readonly IConfiguration _configuration; 
 
-        public HomeController(ILogger<HomeController> logger, IHttpClientFactory httpClientFactory)
+        public HomeController(ILogger<HomeController> logger, IHttpClientFactory httpClientFactory, IConfiguration configuration) // Modified
         {
             _logger = logger;
             _httpClient = httpClientFactory.CreateClient();
-            _httpClient.BaseAddress = new System.Uri("http://localhost:5026");
+            _configuration = configuration; 
+            _httpClient.BaseAddress = new System.Uri(_configuration.GetValue<string>("ApiSettings:BaseUrl")); // Modified
         }
 
         public async Task<IActionResult> Index()
         {
-            var response = await _httpClient.GetAsync("/api/posts");
+            ViewBag.BaseApiUrl = _configuration.GetValue<string>("ApiSettings:BaseUrl");
+            var response = await _httpClient.GetAsync("posts");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
@@ -34,7 +38,8 @@ namespace eContentApp.Web.Controllers
 
         public async Task<IActionResult> Details(Guid id)
         {
-            var response = await _httpClient.GetAsync($"/api/posts/{id}");
+            ViewBag.BaseApiUrl = _configuration.GetValue<string>("ApiSettings:BaseUrl");
+            var response = await _httpClient.GetAsync($"posts/{id}");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
@@ -46,7 +51,8 @@ namespace eContentApp.Web.Controllers
 
         public async Task<IActionResult> Create()
         {
-            var categoriesResponse = await _httpClient.GetAsync("/api/categories");
+            ViewBag.BaseApiUrl = _configuration.GetValue<string>("ApiSettings:BaseUrl");
+            var categoriesResponse = await _httpClient.GetAsync("categories");
             if (categoriesResponse.IsSuccessStatusCode)
             {
                 var content = await categoriesResponse.Content.ReadAsStringAsync();
@@ -69,7 +75,7 @@ namespace eContentApp.Web.Controllers
                 var json = JsonSerializer.Serialize(model);
                 var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
-                var response = await _httpClient.PostAsync("/api/posts", content);
+                var response = await _httpClient.PostAsync("posts", content);
                 if (response.IsSuccessStatusCode)
                 {
                     return RedirectToAction(nameof(Index));
@@ -82,7 +88,8 @@ namespace eContentApp.Web.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            var categoriesResponse = await _httpClient.GetAsync("/api/categories");
+            ViewBag.BaseApiUrl = _configuration.GetValue<string>("ApiSettings:BaseUrl");
+            var categoriesResponse = await _httpClient.GetAsync("categories");
             if (categoriesResponse.IsSuccessStatusCode)
             {
                 var content = await categoriesResponse.Content.ReadAsStringAsync();
