@@ -29,29 +29,40 @@ namespace eContentApp.Tests
         }
 
         [Fact]
-        public async Task GetAllPostsAsync_ShouldReturnAllPosts()
+        public async Task GetAllPostsAsync_ShouldReturnPostsSortedByPublishedAtDescending()
         {
             // Arrange
-            var posts = new List<Post>
-            {
-                new Post { Id = Guid.NewGuid(), Title = "Post 1" },
-                new Post { Id = Guid.NewGuid(), Title = "Post 2" }
-            };
+            var post1 = new Post { Id = Guid.NewGuid(), Title = "Post 1", PublishedAt = new DateTime(2023, 1, 1) };
+            var post2 = new Post { Id = Guid.NewGuid(), Title = "Post 2", PublishedAt = new DateTime(2023, 1, 3) };
+            var post3 = new Post { Id = Guid.NewGuid(), Title = "Post 3", PublishedAt = new DateTime(2023, 1, 2) };
+
+            var posts = new List<Post> { post1, post2, post3 };
+
+            // Expected sorted order (descending by PublishedAt)
+            var expectedSortedPosts = new List<Post> { post2, post3, post1 };
+
             var postListDtos = new List<PostListDto>
             {
-                new PostListDto { Id = posts[0].Id, Title = "Post 1" },
-                new PostListDto { Id = posts[1].Id, Title = "Post 2" }
+                new PostListDto { Id = post2.Id, Title = "Post 2", PublishedAt = post2.PublishedAt },
+                new PostListDto { Id = post3.Id, Title = "Post 3", PublishedAt = post3.PublishedAt },
+                new PostListDto { Id = post1.Id, Title = "Post 1", PublishedAt = post1.PublishedAt }
             };
 
             _mockPostRepository.Setup(repo => repo.GetAllPostsSimpleAsync()).ReturnsAsync(posts);
-            _mockMapper.Setup(mapper => mapper.Map<IEnumerable<PostListDto>>(posts)).Returns(postListDtos);
+            // Mapper should be set up to return the DTOs in the *expected sorted order*
+            _mockMapper.Setup(mapper => mapper.Map<IEnumerable<PostListDto>>(It.IsAny<IEnumerable<Post>>()))
+                       .Returns((IEnumerable<Post> source) => 
+                           source.OrderByDescending(p => p.PublishedAt)
+                                 .Select(p => new PostListDto { Id = p.Id, Title = p.Title, PublishedAt = p.PublishedAt }));
 
             // Act
             var result = await _postService.GetAllPostsAsync();
 
             // Assert
             Assert.NotNull(result);
-            Assert.Equal(2, result.Count());
+            Assert.Equal(3, result.Count());
+            Assert.Equal(postListDtos.Select(p => p.Id), result.Select(p => p.Id));
+            Assert.Equal(postListDtos.Select(p => p.PublishedAt), result.Select(p => p.PublishedAt));
         }
 
         [Fact]
