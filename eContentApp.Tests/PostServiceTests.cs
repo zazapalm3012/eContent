@@ -74,7 +74,9 @@ namespace eContentApp.Tests
             var postDetailDto = new PostDetailDto { Id = postId, Title = "Test Post" };
 
             _mockPostRepository.Setup(repo => repo.GetPostByIdWithCategoriesAsync(postId)).ReturnsAsync(post);
-            _mockMapper.Setup(mapper => mapper.Map<PostDetailDto>(post)).Returns(postDetailDto);
+            #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+            _mockMapper.Setup(mapper => mapper.Map<PostDetailDto>((Post)post)).Returns(postDetailDto);
+            #pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
 
             // Act
             var result = await _postService.GetPostDetailAsync(postId);

@@ -31,8 +31,8 @@ namespace eContentApp.Application.Services
         public async Task<IEnumerable<PostListDto>> GetAllPostsAsync()
         {
             var posts = await _postRepository.GetAllPostsSimpleAsync();
-            //var sortedPosts = posts.OrderByDescending(p => p.PublishedAt);
-            return _mapper.Map<IEnumerable<PostListDto>>(posts);
+            var sortedPosts = posts.OrderByDescending(p => p.PublishedAt);
+            return _mapper.Map<IEnumerable<PostListDto>>(sortedPosts);
         }
         public async Task<PostDetailDto?> GetPostDetailAsync(Guid id)
         {

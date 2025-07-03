@@ -61,7 +61,9 @@ namespace eContentApp.Tests
             var categoryDto = new CategoryDto { Id = categoryId, Name = "Test Category" };
 
             _mockCategoryRepository.Setup(repo => repo.GetByIdAsync(categoryId)).ReturnsAsync(category);
-            _mockMapper.Setup(mapper => mapper.Map<CategoryDto>(category)).Returns(categoryDto);
+            #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+            _mockMapper.Setup(mapper => mapper.Map<CategoryDto>((Category)category)).Returns(categoryDto);
+            #pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
 
             // Act
             var result = await _categoryService.GetCategoryByIdAsync(categoryId);

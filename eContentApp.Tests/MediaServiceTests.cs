@@ -43,7 +43,7 @@ namespace eContentApp.Tests
             // Assert
             Assert.NotNull(result);
             Assert.EndsWith(fileUploadDto.FileName, result.FileName);
-            Assert.True(File.Exists(Path.Combine(uploadPath, result.FileName)));
+            Assert.True(File.Exists(Path.Combine(uploadPath, result.FileName!)));
 
             // Cleanup
             Directory.Delete(uploadPath, true);
@@ -53,7 +53,7 @@ namespace eContentApp.Tests
         public async Task UploadMediaAsync_ShouldThrowArgumentException_WhenFileIsEmptyOrNull()
         {
             // Arrange
-            var fileUploadDto = new FileUploadDto { Content = null };
+            var fileUploadDto = new FileUploadDto { Content = Array.Empty<byte>() };
             var uploadPath = Path.Combine(Path.GetTempPath(), "eContentApp_Tests");
 
             // Act & Assert
