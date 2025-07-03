@@ -91,7 +91,7 @@ cd eContentApp.Web
 dotnet run
 ```
 
-This will start the web application, usually on `http://localhost:5027` (check `launchSettings.json` for exact URL).
+This will start the web application, usually on ` https://localhost:7061` or `http://localhost:5002` (check `launchSettings.json` for exact URL).
 
 Alternatively, you can open `eContentAppSolution.sln` in Visual Studio and run the projects directly from there.
 
